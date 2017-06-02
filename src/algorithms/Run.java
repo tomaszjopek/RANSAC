@@ -22,6 +22,10 @@ public class Run {
         MyImage sImage = new MyImage(listTwo);
 
         List<Pair> pairs = fImage.getPairs(sImage);
+        Neighbourhood neighbourhood = new Neighbourhood(pairs, 5);
+        List<Pair> consistancePairs = neighbourhood.getConsistanceNeighbours(200);
+
+        assert consistancePairs.size() != 0 : "Pusty zbior par spojnych";
 
         ImageIcon iconOne = new ImageIcon("E:\\workspace\\SI\\RANSAC\\res\\images\\chobieniaone.png");
         ImageIcon iconTwo = new ImageIcon("E:\\workspace\\SI\\RANSAC\\res\\images\\chobieniasec.png");
@@ -36,9 +40,9 @@ public class Run {
         graphics2D.drawImage(image2, image1.getWidth(null), 0, null);
 
         Random rand = new Random();
-        Color color = null;
+        Color color;
 
-        for(Pair pair : pairs) {
+        for(Pair pair : consistancePairs) {
             Shape shape = new Line2D.Double(
                     pair.getFirstPoint().getxCoordinate(),
                     pair.getFirstPoint().getyCoordinate(),
@@ -61,8 +65,5 @@ public class Run {
         frame.setExtendedState(Frame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
-
-
     }
-
 }

@@ -71,7 +71,11 @@ public class MyImage {
 
         for(int i = 0; i < length; i++) {
             int index = image1[i].getNeighbourIndex();
+
             if(i == image2[index].getNeighbourIndex()) {
+                image1[i].setNeighbourIndex(pairs.size());
+                image2[i].setNeighbourIndex(pairs.size());
+
                 Pair tmpPair = new Pair(image1[i], image2[index]);
                 pairs.add(0, tmpPair);
             }

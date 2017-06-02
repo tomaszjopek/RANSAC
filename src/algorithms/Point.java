@@ -8,6 +8,7 @@ public class Point {
     private double yCoordinate;
     private int[] features;
     private int neighbourIndex;
+    private double distance;
 
     public Point(double xCoordinate, double yCoordinate) {
         this.xCoordinate = xCoordinate;
@@ -51,5 +52,13 @@ public class Point {
 
     public void setNeighbourIndex(int neighbourIndex) {
         this.neighbourIndex = neighbourIndex;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }
