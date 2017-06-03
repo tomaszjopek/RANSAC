@@ -22,10 +22,13 @@ public class Run {
         MyImage sImage = new MyImage(listTwo);
 
         List<Pair> pairs = fImage.getPairs(sImage);
-        Neighbourhood neighbourhood = new Neighbourhood(pairs, 5);
-        List<Pair> consistancePairs = neighbourhood.getConsistanceNeighbours(200);
+        /*Neighbourhood neighbourhood = new Neighbourhood(pairs, 5);
+        List<Pair> consistancePairs = neighbourhood.getConsistanceNeighbours(200);*/
 
-        assert consistancePairs.size() != 0 : "Pusty zbior par spojnych";
+        //assert consistancePairs.size() != 0 : "Pusty zbior par spojnych";
+
+        Ransac ransac = new Ransac(pairs);
+        List<Pair> affine = ransac.getfilteredPairs("perspective", 10, 100);
 
         ImageIcon iconOne = new ImageIcon("E:\\workspace\\SI\\RANSAC\\res\\images\\chobieniaone.png");
         ImageIcon iconTwo = new ImageIcon("E:\\workspace\\SI\\RANSAC\\res\\images\\chobieniasec.png");
@@ -42,7 +45,7 @@ public class Run {
         Random rand = new Random();
         Color color;
 
-        for(Pair pair : consistancePairs) {
+        for(Pair pair : affine) {
             Shape shape = new Line2D.Double(
                     pair.getFirstPoint().getxCoordinate(),
                     pair.getFirstPoint().getyCoordinate(),
